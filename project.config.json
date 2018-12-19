@@ -1,0 +1,73 @@
+{
+	"description": "A WePY project",
+	"setting": {
+		"urlCheck": true,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx025841df48304564",
+	"projectname": "luckdraw",
+	"miniprogramRoot": "./dist",
+	"libVersion": "2.2.0",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "flc",
+					"pathName": "pages/getMoreFLC",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "history",
+					"pathName": "pages/historyDraw",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "prize",
+					"pathName": "pages/prize",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "changedetails",
+					"pathName": "pages/exchangeDetails",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "turn",
+					"pathName": "pages/text",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "turn",
+					"pathName": "pages/turn",
+					"query": ""
+				}
+			]
+		}
+	}
+}

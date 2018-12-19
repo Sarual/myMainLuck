@@ -1,9 +1,11 @@
 <template>
+<div>
   <view class="tabBarCustom" style="height: {{barHeight}}px">
     <image style="top: {{barTitleImgHeight}}px" src="{{barBackBtn}}" @tap="back" wx:if="{{isBackBtn}}"></image>
     <text style="margin-top: {{barTitleHeight}}px">{{titleText}}</text>
   </view>
   <view class="seat" style="height: {{barHeight}}px"></view>
+</div>
 </template>
 <script>
 import wepy from 'wepy'

@@ -137,7 +137,7 @@ export default class baseMixin extends wepy.mixin {
     }
     return '#' + rgb.join('')
   }
-  // 获取用户信息
+  // 获取用户信息(改：用户需要要注册)
   $getUserId() {
     return service.isFormal ? wepy.getStorageSync('userId') : wepy.getStorageSync('userIdInfo')
   }

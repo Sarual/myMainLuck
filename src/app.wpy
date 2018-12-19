@@ -2,40 +2,40 @@
 import wepy from 'wepy'
 import 'wepy-async-function'
 import { service } from './config.js'
-
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/home'
+      'pages/home',
+      'pages/personalCenter'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTextStyle: 'black',
-      // navigationBarTitleText: 'tabBar', // 配置底部导航
+      navigationBarTitleText: 'tabBar', // 配置底部导航
       onReachBottom: true,
       navigationStyle: 'custom'
+    },
+    tabBar: {
+      color: '#999999',
+      selectedColor: '#FA5C37',
+      backgroundColor: '#fff',
+      borderStyle: 'black',
+      list: [
+        {
+          text: '首页',
+          pagePath: 'pages/home',
+          iconPath: './assets/images/another/home_gray.png',
+          selectedIconPath: './assets/images/another/home.png'
+        },
+        {
+          text: '我的',
+          pagePath: 'pages/personalCenter',
+          iconPath: './assets/images/another/my_gray.png',
+          selectedIconPath: './assets/images/another/my_red.png'
+        }
+      ]
     }
-    // tabBar: {
-    //   color: '#999999',
-    //   selectedColor: '#FA5C37',
-    //   backgroundColor: '#fff',
-    //   borderStyle: 'black',
-    //   list: [
-    //     {
-    //       text: '首页',
-    //       pagePath: 'pages/home',
-    //       iconPath: './assets/images/tabbars/icon-home.png',
-    //       selectedIconPath: './assets/images/tabbars/icon-home-active.png'
-    //     },
-    //     {
-    //       text: '我的',
-    //       pagePath: 'pages/personalCenter',
-    //       iconPath: './assets/images/tabbars/icon-personal.png',
-    //       selectedIconPath: './assets/images/tabbars/icon-personal-active.png'
-    //     }
-    //   ]
-    // }
   }
 
   globalData = {
@@ -105,8 +105,8 @@ export default class extends wepy.app {
 
   onShareAppMessage () {
     return {
-      title: '福利',
-      desc: '抽奖',
+      title: '搞点福利',
+      desc: '搞点福利，靠谱抽奖',
       path: 'pages/home'
     }
   }

@@ -1,0 +1,25 @@
+<template>
+  <TitleBar :isBackBtn.sync="isBackBtn" :titleText.sync="titleText"></TitleBar>
+</template>
+<script>
+  import wepy from 'wepy'
+  import base from '../mixins/base'
+  import TitleBar from '../components/TitleBar'
+  export default class Strategy extends wepy.page {
+    mixins = [base]
+    config = {}
+    data = {
+      titleText: '钱钱钱',
+      isBackBtn: true
+    }
+    components = {
+      TitleBar
+    }
+    methods = {}
+    onLoad() {}
+    onShow() {}
+  }
+</script>
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../assets/stylesheets/layout.scss";
+</style>

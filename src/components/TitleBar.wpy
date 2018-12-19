@@ -1,11 +1,9 @@
 <template>
-<div>
   <view class="tabBarCustom" style="height: {{barHeight}}px">
     <image style="top: {{barTitleImgHeight}}px" src="{{barBackBtn}}" @tap="back" wx:if="{{isBackBtn}}"></image>
     <text style="margin-top: {{barTitleHeight}}px">{{titleText}}</text>
   </view>
   <view class="seat" style="height: {{barHeight}}px"></view>
-</div>
 </template>
 <script>
 import wepy from 'wepy'
@@ -27,7 +25,7 @@ export default class TitleBar extends wepy.component {
     },
     barBackBtn: {
       type: [String],
-      default: '../assets/images/tabbars/back.png'
+      default: '../assets/images/home/back.png'
     },
     isBackBtn: {
       type: [Boolean],
@@ -39,7 +37,7 @@ export default class TitleBar extends wepy.component {
     },
     titleText: {
       type: [String],
-      default: '酒店查询'
+      default: 'AA连锁酒店'
     },
     formId: {
       type: [String],
@@ -53,12 +51,12 @@ export default class TitleBar extends wepy.component {
   computed = {
     init() {
       if (this.isShareBtn) {
-        this.barBackBtn = '../assets/images/tabbars/home.png'
+        this.barBackBtn = '../assets/images/home/back.png'
       }
-      let sys = wepy.getSystemInfoSync()
-      this.barTitleImgHeight = sys.statusBarHeight + 3
-      this.barTitleHeight = sys.statusBarHeight + 8
-      this.barHeight = sys.statusBarHeight + 32 + 16
+      // let sys = wepy.getSystemInfoSync()
+      // this.barTitleImgHeight = sys.statusBarHeight + 3
+      // this.barTitleHeight = sys.statusBarHeight + 8
+      // this.barHeight = sys.statusBarHeight + 32 + 16
       // this.barTitleHeight = 100
     }
   }

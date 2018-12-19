@@ -1,4 +1,4 @@
-# 抽奖小程序
+# AA连锁酒店小程序
 
 ## 依赖
 
@@ -45,15 +45,8 @@ $ wepy build --watch
  - 组件：
 
 ```
-├── LoadingX               抽奖加载条
 ├── LoadingZ               窗口加载条
-├── Barrage                弹幕测试(未启用)
-├── PrizesListModule       抽奖列表页
-├── PreviewListModule      抽奖预告页
-├── WelfareModule          福利分领取页&兑换商品页
-├── Sidebar                侧边栏小功能条(未启用)
 ├── TitleBar               自定义头部
-├── TransmissionGate       切换标签(首页&个人中心)
 ```
 
  - 工具方法：
@@ -68,22 +61,7 @@ $ wepy build --watch
  - 页面
 
 ```
-├── home                   首页 奖品列表页
-├── luckDraw               奖品详情页 抽奖页
-├── personalCenter         个人中心 我参加的抽奖、中奖纪录、收货地址
-├── past                   我参与过的抽奖页 待开奖、已结束
-├── prize                  中/未中奖展示页、分享页、通过通知点进去展示页
-├── record                 中过奖的记录页
-├── portraitList           头像列表
-├── FLBRecord              福利分领取记录
-├── exchangeDetails        兑换商品详情
-├── exchangeRecord         兑换商品记录
-├── rankingList            排行榜
-├── strategy               赚币攻略
-|—— getMoreFLC             福利分页面 获得更多福利分
-|—— historyDraw            历史抽奖
-|—— sponsor                成为赞助商
-|—— feedBack               意见反馈
+├── home                   首页
 ```
 
 具体代码参照已实现的WePY

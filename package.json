@@ -14,7 +14,7 @@
     "module-a": false,
     "./src/components/list": "./src/components/wepy-list.wpy"
   },
-  "author": "Judy <zhangyaping00001@163.com>",
+  "author": "Judy Zhang <zhangyaping00001@163.com>",
   "license": "MIT",
   "dependencies": {
     "less": "^3.9.0",

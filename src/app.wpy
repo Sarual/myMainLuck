@@ -6,25 +6,7 @@ import { service } from './config.js'
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/home',
-      'pages/historyDraw',
-      'pages/getMoreFLC',
-      'pages/rankingList',
-      'pages/personalCenter',
-      'pages/exchangeDetails',
-      'pages/exchangeRecord',
-      'pages/preview',
-      'pages/luckDraw',
-      'pages/past',
-      'pages/prize',
-      'pages/portraitList',
-      'pages/record',
-      'pages/probability',
-      'pages/FLBRecord',
-      'pages/strategy',
-      'pages/turn',
-      'pages/feedBack',
-      'pages/sponsor'
+      'pages/home'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -123,8 +105,8 @@ export default class extends wepy.app {
 
   onShareAppMessage () {
     return {
-      title: '搞点福利',
-      desc: '搞点福利，靠谱抽奖',
+      title: '福利',
+      desc: '抽奖',
       path: 'pages/home'
     }
   }

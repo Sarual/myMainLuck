@@ -1,6 +1,6 @@
 {
   "name": "luckdraw",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "A WePY project",
   "main": "dist/app.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "module-a": false,
     "./src/components/list": "./src/components/wepy-list.wpy"
   },
-  "author": "tuoxie15 <tuoxie18@gmail.com>",
+  "author": "Judy <zhangyaping00001@163.com>",
   "license": "MIT",
   "dependencies": {
     "less": "^3.9.0",

@@ -9,7 +9,8 @@ export default class extends wepy.app {
       'pages/personalCenter',
       'pages/myHotel',
       'pages/myOrder',
-      'pages/myAssets'
+      'pages/myAssets',
+      'pages/coUseInfo'
     ],
     window: {
       backgroundTextStyle: 'light',

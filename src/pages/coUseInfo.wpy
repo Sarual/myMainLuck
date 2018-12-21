@@ -1,0 +1,32 @@
+<template>
+  <div>
+    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
+    <LoadingX :isShow.sync="isShow"></LoadingX>
+  </div>
+</template>
+<script>
+  import wepy from 'wepy'
+  import TitleBar from '../components/TitleBar'
+  import LoadingX from '../components/LoadingX'
+  export default class Strategy extends wepy.page {
+    config = {}
+    data = {
+      titleText: '',
+      isBackBtn: true,
+      isShow: true
+    }
+    components = {
+      TitleBar,
+      LoadingX
+    }
+    methods = {
+    }
+    onLoad() {
+      this.titleText = '常用信息'
+    }
+    onShow() {}
+  }
+</script>
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../assets/stylesheets/layout.scss";
+</style>

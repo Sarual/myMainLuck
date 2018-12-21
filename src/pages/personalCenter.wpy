@@ -14,6 +14,10 @@
         <image src="../assets/images/another/icon_score@2x.png"></image>
         <text>我的资产</text>
       </navigator>
+      <navigator hover-class="none" url="/pages/coUseInfo">
+        <image src="../assets/images/another/clock.png"></image>
+        <text>常用信息</text>
+      </navigator>
     </view>
     <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
     <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->

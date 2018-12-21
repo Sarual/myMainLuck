@@ -45,7 +45,7 @@ $ wepy build --watch
  - 组件：
 
 ```
-├── LoadingZ               窗口加载条
+├── LoadingX               窗口加载条
 ├── TitleBar               自定义头部
 ```
 

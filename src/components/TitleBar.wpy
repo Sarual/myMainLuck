@@ -55,11 +55,10 @@ export default class TitleBar extends wepy.component {
       if (this.isShareBtn) {
         this.barBackBtn = '../assets/images/home/back.png'
       }
-      // let sys = wepy.getSystemInfoSync()
-      // this.barTitleImgHeight = sys.statusBarHeight + 3
-      // this.barTitleHeight = sys.statusBarHeight + 8
-      // this.barHeight = sys.statusBarHeight + 32 + 16
-      // this.barTitleHeight = 100
+      let sys = wepy.getSystemInfoSync()
+      this.barTitleImgHeight = sys.statusBarHeight + 3
+      this.barTitleHeight = sys.statusBarHeight + 8
+      this.barHeight = sys.statusBarHeight + 32 + 16
     }
   }
   methods = {

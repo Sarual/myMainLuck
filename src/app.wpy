@@ -6,7 +6,10 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/home',
-      'pages/personalCenter'
+      'pages/personalCenter',
+      'pages/myHotel',
+      'pages/myOrder',
+      'pages/myAssets'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -105,8 +108,8 @@ export default class extends wepy.app {
 
   onShareAppMessage () {
     return {
-      title: '搞点福利',
-      desc: '搞点福利，靠谱抽奖',
+      title: 'AA连锁酒店',
+      desc: 'A&A连锁酒店是新时代互联网连锁品牌，由专业化的连锁酒店运营团队为合作酒店提供多项支持。',
       path: 'pages/home'
     }
   }

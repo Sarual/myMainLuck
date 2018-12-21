@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"appid": "wx0ec07aac61329592",
-	"projectname": "luckdraw",
+	"projectname": "AAChainHotel",
 	"miniprogramRoot": "./dist",
 	"libVersion": "2.2.0",
 	"condition": {
@@ -29,43 +29,24 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
-					"name": "flc",
-					"pathName": "pages/getMoreFLC",
+					"name": "personalCenter",
+					"pathName": "pages/personalCenter",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "history",
-					"pathName": "pages/historyDraw",
+					"name": "myOrder",
+					"pathName": "pages/myOrder",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "prize",
-					"pathName": "pages/prize",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "changedetails",
-					"pathName": "pages/exchangeDetails",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "turn",
-					"pathName": "pages/text",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "turn",
-					"pathName": "pages/turn",
-					"query": ""
+					"name": "myAssets",
+					"pathName": "pages/myAssets"
 				}
 			]
 		}

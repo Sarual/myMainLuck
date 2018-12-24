@@ -1,7 +1,7 @@
 <template>
   <div>
     <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
-    <LoadingX :isShow.sync="isShow"></LoadingX>
+    <LoadingX :isLoading.sync="isLoading"></LoadingX>
   </div>
 </template>
 <script>
@@ -9,11 +9,12 @@
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
   export default class Strategy extends wepy.page {
-    config = {}
+    config = {
+    }
     data = {
       titleText: '',
       isBackBtn: true,
-      isShow: true
+      isLoading: true
     }
     components = {
       TitleBar,
@@ -22,9 +23,21 @@
     methods = {
     }
     onLoad() {
-      this.titleText = '常用信息'
+      var that = this
+      that.titleText = '常用信息'
+      if (that.isLoading) {
+        that.loadBarLimit()
+      }
     }
-    onShow() {}
+    onShow() {
+    }
+    // 普通自定义方法在methods对象外声明，与methods平级
+    loadBarLimit() {
+      setTimeout(() => {
+        this.isLoading = false
+        this.$apply()
+      }, 1000)
+    }
   }
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>

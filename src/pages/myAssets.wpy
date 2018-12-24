@@ -36,7 +36,7 @@
     methods = {}
     onLoad() {}
     onShow() {
-      this.titleText = '兑换记录'
+      this.titleText = '资产记录'
     }
     switchTabBtn(event) {
       this.switchTabName = event.target.dataset.wpyswitchtabbtnA

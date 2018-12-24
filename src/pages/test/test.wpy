@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn" :barBackBtn.sync="barBackBtn"></TitleBar>
+    <view class="text" style="text-align:center;margin-top:50rpx;">
+      test
+    </view>
+  </div>
+</template>
+<script>
+  import wepy from 'wepy'
+  import base from '../../mixins/base'
+  import TitleBar from '../../components/TitleBar'
+  export default class Strategy extends wepy.page {
+    mixins = [base]
+    config = {}
+    data = {
+      titleText: '',
+      isBackBtn: true,
+      barBackBtn: '../../assets/images/home/back.png'
+    }
+    components = {
+      TitleBar
+    }
+    methods = {
+    }
+    onLoad() {
+      this.titleText = '我的测试'
+      wx.showToast({
+        title: '我是原声Toast',
+        icon: 'success',
+        duration: 2000
+      })
+      // wx.showLoading({
+      //   title: '加载中'
+      // })
+      // setTimeout(function () {
+      //   wx.hideLoading()
+      // }, 2000)
+    }
+    onShow() {}
+  }
+</script>
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../../assets/stylesheets/layout.scss";
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TitleBar :titleText.sync="titleText"></TitleBar>
+    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
     <view class="option">
       <navigator hover-class="none" url="/pages/myHotel">
         <image src="../assets/images/another/icon_orders@2x.png"></image>
@@ -17,6 +17,10 @@
       <navigator hover-class="none" url="/pages/coUseInfo">
         <image src="../assets/images/another/clock.png"></image>
         <text>常用信息</text>
+      </navigator>
+      <navigator hover-class="none" url="./test/test">
+        <image src="../assets/images/another/icon_GoodGray@2x.png"></image>
+        <text>我的测试</text>
       </navigator>
     </view>
     <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>

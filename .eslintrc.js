@@ -16,7 +16,8 @@ module.exports = {
     components: true,
     methods: true,
     props: true,
-    computed: true
+    computed: true,
+    wx: true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',

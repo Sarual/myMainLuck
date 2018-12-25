@@ -2,35 +2,64 @@
   <div>
     <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
     <LoadingX :isLoading.sync="isLoading"></LoadingX>
+    <TabBarS :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBarS>
+    <view class="homeSurround">
+      <swiper style="height: {{clientHeight?clientHeight+'px':'auto'}}" current="{{switchTabName}}" bindchange="switchTab" duration='300'>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            111
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            222
+          </scroll-view>
+        </swiper-item>
+        <swiper-item>
+          <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+            333
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+    </view>
   </div>
 </template>
+
 <script>
   import wepy from 'wepy'
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
+  import TabBarS from '../components/TabBarS'
   export default class Strategy extends wepy.page {
-    config = {
-    }
+    config = {}
     data = {
       titleText: '',
       isBackBtn: true,
-      isLoading: true
+      isLoading: true,
+      tabList: ['旅客', '地址', '发票']
     }
     components = {
       TitleBar,
-      LoadingX
+      LoadingX,
+      TabBarS
     }
-    methods = {
-    }
-    onLoad() {
+    methods = {}
+    onLoad(options) {
+      console.log('常用信息options:', options)
       var that = this
       that.titleText = '常用信息'
+      // 获取屏幕可用高度
+      wepy.getSystemInfo({
+        success: function(res) {
+          let barHeight = res.statusBarHeight + 32 + 16
+          that.clientHeight = res.windowHeight - barHeight - 54
+        }
+      })
       if (that.isLoading) {
         that.loadBarLimit()
       }
     }
-    onShow() {
-    }
+    onShow() {}
     // 普通自定义方法在methods对象外声明，与methods平级
     loadBarLimit() {
       setTimeout(() => {
@@ -40,6 +69,14 @@
     }
   }
 </script>
+
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/stylesheets/layout.scss";
+  .homeSurround {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    margin-top: 110rpx;
+  }
 </style>

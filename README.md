@@ -54,7 +54,6 @@ $ wepy build --watch
 ```
 ├── base                   综合工具类
 ├── http                   请求接口类
-├── ShareMessage           分享类
 ```
 
  - 页面

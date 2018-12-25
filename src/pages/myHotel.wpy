@@ -1,8 +1,11 @@
 <template>
   <div>
     <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
+    <TabBar :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
     <view class="text" style="text-align:center;margin-top:50rpx;">
-      999999-order-999999
+      <view  wx:if="{{currentTab==0}}">0</view>
+      <view  wx:if="{{currentTab==1}}">1</view>
+      <view  wx:if="{{currentTab==2}}">2</view>
     </view>
   </div>
 </template>
@@ -10,19 +13,24 @@
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
+  import TabBar from '../components/TabBar'
   export default class Strategy extends wepy.page {
     mixins = [base]
     config = {}
     data = {
       titleText: '',
-      isBackBtn: true
+      isBackBtn: true,
+      currentTab: 0,
+      tabList: ['首页', '玩周边', '个人']
     }
     components = {
-      TitleBar
+      TitleBar,
+      TabBar
     }
     methods = {
     }
-    onLoad() {
+    onLoad(options) {
+      console.log('options:', options)
       this.titleText = '我的酒店'
     }
     onShow() {}

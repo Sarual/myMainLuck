@@ -1,0 +1,170 @@
+<template>
+  <div>
+    <TitleBar :titleText.sync="titleText"></TitleBar>
+    <view class="authorize-contianer">
+      <image class="authorize-icon" src="../assets/images/another/banner-6.jpg"></image>
+      <view class="auth-item">AA连锁酒店申请获取以下权限：</view>
+      <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
+      <view class="btn-authorize">
+        <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权</button>
+      </view>
+    </view>
+  </div>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import service from '../config'
+  import http from '../mixins/base'
+  import base from '../mixins/http'
+  import tip from '../assets/utils/tip'
+  import TitleBar from '../components/TitleBar'
+  import {
+    SYSTEM_INFO,
+    USER_SPECICAL_INFO,
+    USER_INFO
+  } from '../assets/utils/constant'
+  export default class Authorize extends wepy.page {
+    mixins = [base, http]
+    config = {}
+    components = {
+      TitleBar
+    }
+    data = {
+      titleText: ''
+    }
+    onLoad() {
+      var that = this
+      this.titleText = '微信授权'
+      let userInfo = ''
+      // 判断是否有nickName，没有就去获取
+      if (!userInfo.nickName) {
+        wx.getUserInfo({
+          success: data => {
+            wepy.setStorageSync(USER_INFO, data.userInfo)
+            // 判断是否登陆，没有就去登陆
+            wepy.login({ // 登录获取
+              success: res => {
+                if (res.code) {
+                  let systemInfo = wepy.getSystemInfoSync()
+                  wepy.setStorageSync(SYSTEM_INFO, systemInfo)
+                  // 存储用户认证的session（用code和nickName去换取）
+                  that.$post({
+                    url: service.wxJsCode2Session,
+                    headers: {
+                      'X-JINKU-WECHAT-FORM-ID': that.formId
+                    },
+                    data: {
+                      jsCode: res.code,
+                      nickName: data.userInfo.nickName
+                    }
+                  }, {
+                    success: ({
+                      statusCode,
+                      data
+                    }) => {
+                      if (statusCode === 200) {
+                        tip.success('授权成功')
+                        // if (rlt.data.result) {
+                        //   let data = rlt.data
+                        //   if (data.data.openid) {
+                        //     wepy.setStorageSync(USER_SPECICAL_INFO, data.data)
+                        //   }
+                        // }
+                      } else {
+                        // 收不到验证码/验证失败
+                      }
+                    }
+                  })
+                }
+              }
+            })
+          }
+        })
+      }
+      wepy.switchTab({
+        url: '/pages/home'
+      })
+    }
+    onGotUserInfo(e) {
+      var that = this
+      if (e.detail.errMsg === 'getUserInfo:ok') {
+        wepy.login({ // 登录获取
+          success: res => {
+            if (res.code) {
+              wepy.setStorageSync(USER_INFO, e.detail.userInfo)
+              let systemInfo = wepy.getSystemInfoSync()
+              wepy.setStorageSync(SYSTEM_INFO, systemInfo)
+              // 存储用户认证的session
+              that.$post(
+                {
+                  url: service.wxJsCode2Session,
+                  headers: {
+                    'X-JINKU-WECHAT-FORM-ID': that.formId
+                  },
+                  data: {
+                    jsCode: res.code,
+                    nickName: res.userInfo.nickName
+                  }
+                },
+                {
+                  success: ({
+                    statusCode,
+                    data
+                  }) => {
+                    let openid = data.data.openid
+                    if (statusCode === 200) {
+                      if (openid) {
+                        wepy.setStorageSync(USER_SPECICAL_INFO, data.data.openid)
+                        wepy.switchTab({
+                          url: '/pages/home'
+                        })
+                      }
+                    } else {
+                      let data = wepy.showModal({
+                        title: 'appid有误',
+                        content: '授权失败'
+                      })
+                      if (data.confirm) {
+                        wepy.switchTab({
+                          url: '/pages/home'
+                        })
+                      }
+                    }
+                  }
+                }
+              )
+            }
+          }
+        })
+      }
+    }
+    methods = {}
+    events = {}
+  }
+</script>
+
+<style lang="less">
+  page {
+    height: 100%;
+  }
+  .authorize-contianer {
+    height: 100%;
+    background: #fff;
+    text-align: center;
+    padding-top: 100rpx;
+    .authorize-icon {
+      width: 128rpx;
+      height: 128rpx;
+      display: block;
+      margin: 0 auto;
+      padding-bottom: 10rpx;
+    }
+    .auth-item {
+      padding: 5rpx 0;
+    }
+    .btn-authorize {
+      margin: 100rpx 50rpx;
+    }
+  }
+</style>

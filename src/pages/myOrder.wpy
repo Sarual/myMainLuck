@@ -35,7 +35,7 @@
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
-  export default class Strategy extends wepy.page {
+  export default class MyOrder extends wepy.page {
     mixins = [base]
     config = {
     }

@@ -1,33 +1,45 @@
 <template>
-  <div>
-    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
-    <TabBar :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
-    <view class="text" style="text-align:center;margin-top:50rpx;">
-      <view  wx:if="{{currentTab==0}}">0</view>
-      <view  wx:if="{{currentTab==1}}">1</view>
-      <view  wx:if="{{currentTab==2}}">2</view>
-    </view>
-  </div>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
+  <TabBar @currentTab.user="getCurrentTab" :currentTab.sync="currentTab" :tabList.sync="tabList"></TabBar>
+  <view class="text" style="text-align:center;margin-top:50rpx;">
+    <view wx:if="{{currentTab==0}}">五星级</view>
+    <view wx:if="{{currentTab==1}}">高档型</view>
+    <view wx:if="{{currentTab==2}}">中低档</view>
+  </view>
 </template>
+
 <script>
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
   import TabBar from '../components/TabBar'
-  export default class Strategy extends wepy.page {
+  export default class Myhotel extends wepy.page {
     mixins = [base]
     config = {}
     data = {
       titleText: '',
       isBackBtn: true,
       currentTab: 0,
-      tabList: ['首页', '玩周边', '个人']
+      tabList: ['五星级', '高档型', '中低档']
     }
     components = {
       TitleBar,
       TabBar
     }
     methods = {
+      getCurrentTab(cur, evt) {
+        let that = this
+        that.currentTab = cur
+        that.$apply()
+      },
+      /**
+       * 滑动切换tab
+       */
+      bindChange(e) {
+        let that = this
+        that.currentTab = e.detail.current
+        that.$apply()
+      }
     }
     onLoad(options) {
       console.log('options:', options)
@@ -36,6 +48,7 @@
     onShow() {}
   }
 </script>
+
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/stylesheets/layout.scss";
 </style>

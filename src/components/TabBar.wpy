@@ -8,7 +8,7 @@
 </template>
 <script>
   import wepy from 'wepy'
-  export default class Filter extends wepy.component {
+  export default class TabBar extends wepy.component {
     props = {
       currentTab: {
         default: 0
@@ -35,7 +35,7 @@
     onLoad() {}
     watch = {
       currentTab(newValue, oldValue) {
-        console.log(`currentTab value: ${oldValue} -> ${newValue}`)
+        console.log(`${oldValue} -> ${newValue}`)
       }
     }
   }

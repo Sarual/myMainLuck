@@ -1,0 +1,98 @@
+<template>
+  <div>
+    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
+    <LoadingX :isLoading.sync="isLoading"></LoadingX>
+    <TabBarS @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBarS>
+    <swiper class="text" style="text-align:center;">
+      <swiper-item wx:if="{{currentTab==0}}">
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+          旅客
+        </scroll-view>
+      </swiper-item>
+      <swiper-item wx:if="{{currentTab==1}}">
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+          地址
+        </scroll-view>
+      </swiper-item>
+      <swiper-item wx:if="{{currentTab==2}}">
+        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+          发票
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+    <!-- <view class="homeSurround">
+              <swiper style="height: {{clientHeight?clientHeight+'px':'auto'}}" current="{{switchTabName}}" bindchange="switchTab" duration='300'>
+                <swiper-item>
+                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+                    111
+                  </scroll-view>
+                </swiper-item>
+                <swiper-item>
+                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+                    222
+                  </scroll-view>
+                </swiper-item>
+                <swiper-item>
+                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+                    333
+                  </scroll-view>
+                </swiper-item>
+              </swiper>
+            </view> -->
+  </div>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import TitleBar from '../components/TitleBar'
+  import LoadingX from '../components/LoadingX'
+  import TabBarS from '../components/TabBarS'
+  export default class Strategy extends wepy.page {
+    config = {}
+    data = {
+      titleText: '',
+      isBackBtn: true,
+      isLoading: true,
+      currentTab: 0,
+      tabList: ['旅客', '地址', '发票']
+    }
+    components = {
+      TitleBar,
+      LoadingX,
+      TabBarS
+    }
+    methods = {
+      getCurrentTab(cur, evt) {
+        let that = this
+        that.currentTab = cur
+        that.$apply()
+      }
+    }
+    onLoad(options) {
+      var that = this
+      // 获取屏幕可用高度
+      wepy.getSystemInfo({
+        success: function(res) {
+          let barHeight = res.statusBarHeight + 32 + 16
+          that.clientHeight = res.windowHeight - barHeight - 54
+        }
+      })
+      that.titleText = '常用信息'
+      if (that.isLoading) {
+        that.loadBarLimit()
+      }
+    }
+    onShow() {}
+    // 普通自定义方法在methods对象外声明，与methods平级
+    loadBarLimit() {
+      setTimeout(() => {
+        this.isLoading = false
+        this.$apply()
+      }, 1000)
+    }
+  }
+</script>
+
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../assets/stylesheets/layout.scss";
+</style>

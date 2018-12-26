@@ -2,13 +2,13 @@
   <view class="swiper-tab">
     <scroll-view wx:for="{{tabList}}" wx:key="index" class="swiper-tab-list {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" bindtap="swichNav">
       {{item.name? item.name:item}}
-      <view class=" {{item.dotNum>=100?'dotbig':'dot'}}" wx:if="{{item.dotNum>0}}">{{item.dotNum}}</view>
+      <scroll-item class=" {{item.dotNum>=100?'dotbig':'dot'}}" wx:if="{{item.dotNum>0}}">{{item.dotNum}}</scroll-item>
     </scroll-view>
   </view>
 </template>
 <script>
   import wepy from 'wepy'
-  export default class Filter extends wepy.component {
+  export default class TabBarS extends wepy.component {
     props = {
       currentTab: {
         default: 0

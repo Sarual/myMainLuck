@@ -1,52 +1,32 @@
 <template>
-  <div>
-    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
-    <LoadingX :isLoading.sync="isLoading"></LoadingX>
-    <TabBarS @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBarS>
-    <swiper class="text" style="text-align:center;">
-      <swiper-item wx:if="{{currentTab==0}}">
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-          旅客
-        </scroll-view>
-      </swiper-item>
-      <swiper-item wx:if="{{currentTab==1}}">
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-          地址
-        </scroll-view>
-      </swiper-item>
-      <swiper-item wx:if="{{currentTab==2}}">
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-          发票
-        </scroll-view>
-      </swiper-item>
-    </swiper>
-    <!-- <view class="homeSurround">
-              <swiper style="height: {{clientHeight?clientHeight+'px':'auto'}}" current="{{switchTabName}}" bindchange="switchTab" duration='300'>
-                <swiper-item>
-                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-                    111
-                  </scroll-view>
-                </swiper-item>
-                <swiper-item>
-                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-                    222
-                  </scroll-view>
-                </swiper-item>
-                <swiper-item>
-                  <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-                    333
-                  </scroll-view>
-                </swiper-item>
-              </swiper>
-            </view> -->
-  </div>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn">
+  </TitleBar>
+  <LoadingX :isLoading.sync="isLoading"></LoadingX>
+  <TabBar @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
+  <swiper class="text" style="text-align:center;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        旅客
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        地址
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        发票
+      </scroll-view>
+    </swiper-item>
+  </swiper>
 </template>
 
 <script>
   import wepy from 'wepy'
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
-  import TabBarS from '../components/TabBarS'
+  import TabBar from '../components/TabBar'
   export default class Strategy extends wepy.page {
     config = {}
     data = {
@@ -59,24 +39,26 @@
     components = {
       TitleBar,
       LoadingX,
-      TabBarS
+      TabBar
     }
     methods = {
       getCurrentTab(cur, evt) {
         let that = this
         that.currentTab = cur
         that.$apply()
+      },
+      switchTab(e) {
+        // 父组件改变子组件的属性
+        let current = e.detail.current.toString()
+        if (this.currentTab === current) return false
+        else {
+          this.currentTab = current
+        }
       }
     }
     onLoad(options) {
       var that = this
-      // 获取屏幕可用高度
-      wepy.getSystemInfo({
-        success: function(res) {
-          let barHeight = res.statusBarHeight + 32 + 16
-          that.clientHeight = res.windowHeight - barHeight - 54
-        }
-      })
+      //
       that.titleText = '常用信息'
       if (that.isLoading) {
         that.loadBarLimit()

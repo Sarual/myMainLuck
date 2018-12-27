@@ -1,130 +1,78 @@
 <template>
-  <div>
-    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
-    <view class="switchTab">
-      <form bindsubmit="formSubmit" bindreset="formReset" report-submit="true">
-        <scroll-view>
-          <button class="switchTabBtn {{switchTabName === '0' ? 'active' : '' }}" open-type="reLaunch" data-current='0' @tap="switchTabBtn('0')">全部</button>
-          <button class="switchTabBtn {{switchTabName === '1' ? 'active' : '' }}" open-type="reLaunch" data-current='1' @tap="switchTabBtn('1')">待付款</button>
-          <button class="switchTabBtn {{switchTabName === '2' ? 'active' : '' }}" open-type="reLaunch" data-current='2' @tap="switchTabBtn('2')">待评价</button>
-        </scroll-view>
-      </form>
-  </view>
-  <view class="homeSurround">
-    <swiper style="height: {{clientHeight?clientHeight+'px':'auto'}}" current="{{switchTabName}}" bindchange="switchTab" duration='300'>
-      <swiper-item>
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-         111
-        </scroll-view>
-      </swiper-item>
-      <swiper-item>
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-         222
-        </scroll-view>
-      </swiper-item>
-      <swiper-item>
-        <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-        333
-        </scroll-view>
-      </swiper-item>
-    </swiper>
-  </view>
-  </div>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn">
+  </TitleBar>
+  <LoadingX :isLoading.sync="isLoading"></LoadingX>
+  <TabBar @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
+  <swiper class="text" style="text-align:center;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        全部订单
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        代付款
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+        已付款
+      </scroll-view>
+    </swiper-item>
+  </swiper>
 </template>
+
 <script>
   import wepy from 'wepy'
-  import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
-  export default class MyOrder extends wepy.page {
-    mixins = [base]
-    config = {
-    }
+  import LoadingX from '../components/LoadingX'
+  import TabBar from '../components/TabBar'
+  export default class Strategy extends wepy.page {
+    config = {}
     data = {
       titleText: '',
       isBackBtn: true,
-      switchTabName: '0',
-      clientHeight: 0
+      isLoading: true,
+      currentTab: 0,
+      tabList: ['全部订单', '代付款', '已付款']
     }
     components = {
-      TitleBar
+      TitleBar,
+      LoadingX,
+      TabBar
     }
     methods = {
+      getCurrentTab(cur, evt) {
+        let that = this
+        that.currentTab = cur
+        that.$apply()
+      },
       switchTab(e) {
         let current = e.detail.current.toString()
-        if (this.switchTabName === current) return false
+        if (this.currentTab === current) return false
         else {
-          this.switchTabName = current
+          this.currentTab = current
         }
       }
     }
     onLoad(options) {
-      console.log('options:', options)
-      let that = this
-      // 获取屏幕可用高度
-      wepy.getSystemInfo({
-        success: function(res) {
-          let barHeight = res.statusBarHeight + 32 + 16
-          that.clientHeight = res.windowHeight - barHeight - 54
-        }
-      })
+      var that = this
+      //
+      that.titleText = '常用信息'
+      if (that.isLoading) {
+        that.loadBarLimit()
+      }
     }
-    onShow() {
-      this.titleText = '我的订单'
-    }
-    switchTabBtn(event) {
-      console.log('event:', event)
-      this.switchTabName = event.target.dataset.wpyswitchtabbtnA
-      console.log(this.switchTabName)
+    onShow() {}
+    loadBarLimit() {
+      setTimeout(() => {
+        this.isLoading = false
+        this.$apply()
+      }, 1000)
     }
   }
 </script>
-<style lang="scss" rel="stylesheet/scss" scoped>
-@import "../assets/stylesheets/layout.scss";
-.homeSurround {
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  position: relative;
-  margin-top: 110rpx;
-}
-.switchTab {
-  position: fixed;
-  background: #fff;
-  width: 100%;
-  height: 108rpx;
-  text-align: center;
-  overflow: hidden;
-  z-index: 20;
-  .switchTabBtn {
-    width: 140rpx;
-    background: none;
-    color: #666666;
-    font-size: 28rpx;
-    line-height: 108rpx;
-    display: inline-block;
-    text-align: center;
-    padding: 0;
-    &:nth-of-type(2) {
-      margin: 0 50rpx;
-    }
-  }
-  .active {
-    color: #ff471c;
-    position: relative;
 
-    &:before {
-      content: '';
-      position: absolute;
-      z-index: 9;
-      display: block;
-      background: #ffa38d;
-      background-size: 28rpx 8rpx;
-      border-radius: 20rpx;
-      width: 100%;
-      height: 8rpx;
-      bottom: 10rpx;
-      left: 0;
-    }
-  }
-}
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../assets/stylesheets/layout.scss";
 </style>

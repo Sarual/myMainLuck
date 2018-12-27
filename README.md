@@ -1,4 +1,4 @@
-# AA连锁酒店小程序
+# AA 连锁酒店小程序
 
 ## 依赖
 
@@ -20,13 +20,14 @@ $ npm install
 ```
 
 #### 开启实时编译
+
 ```
 $ wepy build --watch
 ```
 
 #### 如何开发一个功能页面
 
- - 整体目录结构如下：
+- 整体目录结构如下：
 
 ```
 ├── dist                   小程序运行代码目录（该目录由WePY的build指令自动编译生成，请不要直接修改该目录下的文件）
@@ -42,7 +43,7 @@ $ wepy build --watch
 └── package.json           项目的package配置
 ```
 
- - 组件：
+- 组件：
 
 ```
 ├── LoadingX               窗口加载条
@@ -52,36 +53,38 @@ $ wepy build --watch
 ├── AreaPicker             地区选择器
 ```
 
- - 工具方法：
+- 工具方法：
 
 ```
 ├── base                   综合工具类
 ├── http                   请求接口类
 ```
 
- - 页面
+- 页面
 
 ```
 ├── home                   首页
 ```
 
-具体代码参照已实现的WePY
+具体代码参照已实现的 WePY
 
-### wepy开发文档地址
-	https://tencent.github.io/wepy/
+### wepy 开发文档地址
+
+    https://tencent.github.io/wepy/
 
 ### 小程序开发文档
-	http://mp.weixin.qq.com/debug/wxadoc/dev/
+
+    http://mp.weixin.qq.com/debug/wxadoc/dev/
 
 ### 开发使用说明(重要)
 
-1、使用微信开发者工具-->添加项目，项目目录请选择dist目录。
+1、使用微信开发者工具-->添加项目，项目目录请选择 dist 目录。
 
-2、微信开发者工具-->项目-->关闭ES6转ES5。 <font color=red>重要：漏掉此项会运行报错。</font>
+2、微信开发者工具-->项目-->关闭 ES6 转 ES5。 <font color=red>重要：漏掉此项会运行报错。</font>
 
-3、微信开发者工具-->项目-->关闭上传代码时样式自动补全。  <font color=red>重要：某些情况下漏掉此项也会运行报错。</font>
+3、微信开发者工具-->项目-->关闭上传代码时样式自动补全。 <font color=red>重要：某些情况下漏掉此项也会运行报错。</font>
 
-4、微信开发者工具-->项目-->关闭代码压缩上传。  <font color=red>重要：开启后，会导致真机computed, props.sync 等等属性失效。</font>
+4、微信开发者工具-->项目-->关闭代码压缩上传。 <font color=red>重要：开启后，会导致真机 computed, props.sync 等等属性失效。</font>
 
 ### 演示地址
 

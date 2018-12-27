@@ -49,8 +49,8 @@ $ wepy build --watch
 ├── LoadingX               窗口加载条
 ├── TitleBar               自定义头部
 ├── TabBar                 自定义tabBar-top
-├── Placeholder            noData展示
-├── AreaPicker             地区选择器
+├── Placeholder            noData展示
+├── AreaPicker             地区选择器
 ```
 
 - 工具方法：

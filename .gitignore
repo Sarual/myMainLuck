@@ -3,6 +3,16 @@ dist
 *.log
 .DS_Store
 src/config.js
+# src/assets
 .wepycache
-/.vscode
 .project.config.json
+
+# idea vsCode ignore
+/.vscode
+.settings/
+.buildpath
+.project
+.idea/
+*.ipr
+*.iml
+*.iws

@@ -27,23 +27,26 @@
         <text>个人注册</text>
       </navigator>
       <navigator url="/pages/authorize">
-        <image src="../assets/images/another/pic_loading750.svg"></image>
+        <image src="{{avatarUrl}}"></image>
         <text>微信授权</text>
       </navigator>
     </view>
     <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
-    <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->
+        <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->
   </div>
 </template>
+
 <script>
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
+  import { USER_INFO } from '../assets/utils/constant'
   export default class Strategy extends wepy.page {
     mixins = [base]
     config = {}
     data = {
-      titleText: ''
+      titleText: '',
+      avatarUrl: ''
     }
     components = {
       TitleBar
@@ -62,29 +65,32 @@
     }
     onLoad() {
       this.titleText = '个人中心'
+      this.avatarUrl = wepy.getStorageSync(USER_INFO).avatarUrl
     }
-    onShow() {}
+    onShow() {
+    }
   }
 </script>
+
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/stylesheets/layout.scss";
   /* button{
-    width: 200rpx;
-    height: 92rpx;
-    margin-top: 30rpx;
-    line-height: 92rpx;
-    color: #fb5a35;
-    font-size: 26rpx;
-    background: none;
-    text-align: center;
-    padding: 0;
-    font-size: 26rpx;
-    background-color: #C6E2FF;
-  }
-  button:active{
-    background-color: #87CEFA;
-  } */
-  .option{
+        width: 200rpx;
+        height: 92rpx;
+        margin-top: 30rpx;
+        line-height: 92rpx;
+        color: #fb5a35;
+        font-size: 26rpx;
+        background: none;
+        text-align: center;
+        padding: 0;
+        font-size: 26rpx;
+        background-color: #C6E2FF;
+      }
+      button:active{
+        background-color: #87CEFA;
+      } */
+  .option {
     padding: 0 32rpx;
     width: 686rpx;
     z-index: 1;

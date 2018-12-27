@@ -2,7 +2,7 @@
   <div>
     <TitleBar :titleText.sync="titleText"></TitleBar>
     <view class="authorize-contianer">
-      <image class="authorize-icon" src="../assets/images/another/banner-6.jpg"></image>
+      <image class="authorize-icon"></image>
       <view class="auth-item">AA连锁酒店申请获取以下权限：</view>
       <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
       <view class="btn-authorize">
@@ -85,6 +85,8 @@
       wepy.switchTab({
         url: '/pages/home'
       })
+    }
+    onShow() {
     }
     onGotUserInfo(e) {
       var that = this

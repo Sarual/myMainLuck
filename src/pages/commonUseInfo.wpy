@@ -3,7 +3,7 @@
   </TitleBar>
   <LoadingX :isLoading.sync="isLoading"></LoadingX>
   <TabBar @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
-  <swiper class="text" style="text-align:center;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
+  <swiper class="text" style="text-align:center; margin-top:50rpx;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
     <swiper-item>
       <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
         旅客
@@ -11,7 +11,7 @@
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-        地址
+        <view @tap="openAddressPicker">{{province ? province.name : '省'}} - {{city ? city.name : '市' }} - {{area ? area.name : '区' }}</view>
       </scroll-view>
     </swiper-item>
     <swiper-item>
@@ -20,6 +20,7 @@
       </scroll-view>
     </swiper-item>
   </swiper>
+  <AreaPicker @areaArray.user="areaPickerArray"></AreaPicker>
 </template>
 
 <script>
@@ -27,6 +28,7 @@
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
   import TabBar from '../components/TabBar'
+  import AreaPicker from '../components/AreaPicker'
   export default class Strategy extends wepy.page {
     config = {}
     data = {
@@ -34,12 +36,20 @@
       isBackBtn: true,
       isLoading: true,
       currentTab: 0,
-      tabList: ['旅客', '地址', '发票']
+      tabList: ['旅客', '地址', '发票'],
+      id: '',
+      province: '',
+      city: '',
+      area: '',
+      provinceCode: '',
+      cityCode: '',
+      areaCode: ''
     }
     components = {
       TitleBar,
       LoadingX,
-      TabBar
+      TabBar,
+      AreaPicker
     }
     methods = {
       getCurrentTab(cur, evt) {
@@ -54,17 +64,55 @@
         else {
           this.currentTab = current
         }
+      },
+      openAddressPicker() {
+        this.$invoke('AreaPicker', 'openAddressPicker')
+      },
+      areaPickerArray(province, city, area) {
+        console.log(province, city, area)
+        this.province = province
+        this.city = city
+        this.area = area
+        this.provinceCode = province.code
+        this.cityCode = city.code
+        this.areaCode = area.code
+        this.$apply()
       }
     }
     onLoad(options) {
       var that = this
-      //
       that.titleText = '常用信息'
       if (that.isLoading) {
         that.loadBarLimit()
       }
     }
-    onShow() {}
+    onShow() {
+      // this.province = {
+      //   code: '120000',
+      //   name: '天津市'
+      // }
+      // this.city = {
+      //   code: '120100',
+      //   name: '天津市'
+      // }
+      // this.area = {
+      //   code: '120101',
+      //   name: '和平区'
+      // }
+      this.province = {
+        code: '110000',
+        name: '北京市'
+      }
+      this.city = {
+        code: '110100',
+        name: '北京市'
+      }
+      this.area = {
+        code: '110101',
+        name: '东城区'
+      }
+      this.$invoke('AreaPicker', 'setAddressPickerValue', this.province, this.city, this.area)
+    }
     // 普通自定义方法在methods对象外声明，与methods平级
     loadBarLimit() {
       setTimeout(() => {

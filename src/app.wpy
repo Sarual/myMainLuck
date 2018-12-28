@@ -105,7 +105,7 @@ export default class extends wepy.app {
   }
 
   urlToString(path, query) {
-    return path + '?id=' + query.id + '&share=true&shareUserId=' + query.shareUserId
+    return path + '?id=' + query.id
   }
 
   loginToken(sourceCode) {

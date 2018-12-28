@@ -6,9 +6,12 @@ export default class httpMixin extends wepy.mixin {
   mixins = [base]
   data = {
     accessToken: '',
+    sourceCode: '',
     isLogin: true
   }
   onLoad(options) {
+    let that = this
+    this.sourceCode = wepy.getStorageSync('sourceCode') || ''
     this.accessToken = wepy.getStorageSync(service.isFormal ? 'accessToken' : 'accessTokenInfo') || false
   }
   /* =================== [$get 发起GET请求] =================== */
@@ -19,7 +22,8 @@ export default class httpMixin extends wepy.mixin {
     const methods = 'GET'
     if (this.accessToken) {
       headers = Object.assign({
-        'Authorization': this.accessToken
+        'Authorization': this.accessToken,
+        'X-JINKU-WECHAT-SOURCE-CODE': this.sourceCode
       }, headers)
       this.$ajax(
         {url, headers, methods, data},
@@ -36,7 +40,8 @@ export default class httpMixin extends wepy.mixin {
     const methods = 'POST'
     if (this.accessToken) {
       headers = Object.assign({
-        'Authorization': this.accessToken
+        'Authorization': this.accessToken,
+        'X-JINKU-WECHAT-SOURCE-CODE': this.sourceCode
       }, headers)
       this.$ajax(
         {url, headers, methods, data},

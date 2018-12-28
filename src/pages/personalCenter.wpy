@@ -41,7 +41,7 @@
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
   import { USER_INFO } from '../assets/utils/constant'
-  export default class Strategy extends wepy.page {
+  export default class PersonCenter extends wepy.page {
     mixins = [base]
     config = {}
     data = {

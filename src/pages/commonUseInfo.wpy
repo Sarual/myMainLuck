@@ -29,7 +29,7 @@
   import LoadingX from '../components/LoadingX'
   import TabBar from '../components/TabBar'
   import AreaPicker from '../components/AreaPicker'
-  export default class Strategy extends wepy.page {
+  export default class commonUserInfo extends wepy.page {
     config = {}
     data = {
       titleText: '',

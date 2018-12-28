@@ -10,7 +10,7 @@
   import base from '../../mixins/base'
   import TitleBar from '../../components/TitleBar'
   import Placeholder from '../../components/Placeholder'
-  export default class Strategy extends wepy.page {
+  export default class Test extends wepy.page {
     mixins = [base]
     config = {}
     data = {

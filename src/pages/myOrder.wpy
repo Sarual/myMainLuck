@@ -27,7 +27,7 @@
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
   import TabBar from '../components/TabBar'
-  export default class Strategy extends wepy.page {
+  export default class myOrder extends wepy.page {
     config = {}
     data = {
       titleText: '',

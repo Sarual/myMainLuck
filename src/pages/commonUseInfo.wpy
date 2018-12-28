@@ -6,7 +6,7 @@
   <swiper class="text" style="text-align:center; margin-top:50rpx;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
     <swiper-item>
       <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
-        旅客
+        <image src="../assets/images/another/address.png" style="height:60rpx;width:60rpx;display:inline-block;text-align:center;" @tap="goGPS"></image>
       </scroll-view>
     </swiper-item>
     <swiper-item>
@@ -36,7 +36,7 @@
       isBackBtn: true,
       isLoading: true,
       currentTab: 0,
-      tabList: ['旅客', '地址', '发票'],
+      tabList: ['旅客定位', '地址', '发票'],
       id: '',
       province: '',
       city: '',
@@ -64,6 +64,10 @@
         else {
           this.currentTab = current
         }
+      },
+      goGPS() {
+        // 地理定位
+
       },
       openAddressPicker() {
         this.$invoke('AreaPicker', 'openAddressPicker')

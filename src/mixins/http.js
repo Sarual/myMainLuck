@@ -6,15 +6,10 @@ export default class httpMixin extends wepy.mixin {
   mixins = [base]
   data = {
     accessToken: '',
-    shareUserId: '',
     sourceCode: '',
     isLogin: true
   }
   onLoad(options) {
-    let that = this
-    if (!this.isUndefined(options) && !this.isUndefined(options.shareUserId)) {
-      this.shareUserId = options.shareUserId
-    }
     this.sourceCode = wepy.getStorageSync('sourceCode') || ''
     this.accessToken = wepy.getStorageSync(service.isFormal ? 'accessToken' : 'accessTokenInfo') || false
   }

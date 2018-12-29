@@ -1,10 +1,12 @@
 /**
  * 提示与加载工具类
  */
+
 export default class Tips {
   constructor() {
     this.isLoading = false;
   }
+
   /**
    * 弹出提示框
    */
@@ -61,6 +63,7 @@ export default class Tips {
     }, 300);
 
     // 隐藏结束回调
+
     if (onHide) {
       setTimeout(() => {
         onHide();
@@ -71,6 +74,7 @@ export default class Tips {
   /**
    * 警告框
    */
+
   static alert(title) {
     wx.showToast({
       title: title,
@@ -138,4 +142,5 @@ export default class Tips {
 /**
  * 静态变量，是否加载中
  */
+
 Tips.isLoading = false;

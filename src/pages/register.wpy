@@ -28,9 +28,7 @@
   import base from '../mixins/http'
   import service from '../assets/interface/interface.js'
   import tip from '../assets/utils/tip'
-  import {
-    USER_SPECICAL_INFO
-  } from '../assets/utils/constant'
+  import { USER_SPECICAL_INFO } from '../assets/utils/constant'
   import TitleBar from '../components/TitleBar'
   export default class Register extends wepy.page {
     mixins = [base, http]

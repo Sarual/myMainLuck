@@ -34,12 +34,13 @@
       titleText: ''
     }
     onLoad() {
+      // debugger
       var that = this
       this.titleText = '微信授权'
-      let userInfo = ''
+      let userInfo = wepy.getStorageSync(USER_INFO)
       // 判断是否有nickName，没有就去获取
       if (!userInfo.nickName) {
-        wx.getUserInfo({
+        wepy.getUserInfo({
           success: data => {
             wepy.setStorageSync(USER_INFO, data.userInfo)
             // 判断是否登陆，没有就去登陆
@@ -48,7 +49,7 @@
                 if (res.code) {
                   let systemInfo = wepy.getSystemInfoSync()
                   wepy.setStorageSync(SYSTEM_INFO, systemInfo)
-                  // 存储用户认证的session（用code和nickName去换取）
+                  // 存储用户认证的session（用code和nickName去换取）=== 此请求是让后台也同步表示当前用户是经过授权的。
                   that.$post({
                     url: service.wxJsCode2Session,
                     headers: {
@@ -86,8 +87,7 @@
         url: '/pages/home'
       })
     }
-    onShow() {
-    }
+    onShow() {}
     onGotUserInfo(e) {
       var that = this
       if (e.detail.errMsg === 'getUserInfo:ok') {
@@ -98,44 +98,41 @@
               let systemInfo = wepy.getSystemInfoSync()
               wepy.setStorageSync(SYSTEM_INFO, systemInfo)
               // 存储用户认证的session
-              that.$post(
-                {
-                  url: service.wxJsCode2Session,
-                  headers: {
-                    'X-JINKU-WECHAT-FORM-ID': that.formId
-                  },
-                  data: {
-                    jsCode: res.code,
-                    nickName: res.userInfo.nickName
-                  }
+              that.$post({
+                url: service.wxJsCode2Session,
+                headers: {
+                  'X-JINKU-WECHAT-FORM-ID': that.formId
                 },
-                {
-                  success: ({
-                    statusCode,
-                    data
-                  }) => {
-                    let openid = data.data.openid
-                    if (statusCode === 200) {
-                      if (openid) {
-                        wepy.setStorageSync(USER_SPECICAL_INFO, data.data.openid)
-                        wepy.switchTab({
-                          url: '/pages/home'
-                        })
-                      }
-                    } else {
-                      let data = wepy.showModal({
-                        title: 'appid有误',
-                        content: '授权失败'
+                data: {
+                  jsCode: res.code,
+                  nickName: res.userInfo.nickName
+                }
+              }, {
+                success: ({
+                  statusCode,
+                  data
+                }) => {
+                  let openid = data.data.openid
+                  if (statusCode === 200) {
+                    if (openid) {
+                      wepy.setStorageSync(USER_SPECICAL_INFO, data.data.openid)
+                      wepy.switchTab({
+                        url: '/pages/home'
                       })
-                      if (data.confirm) {
-                        wepy.switchTab({
-                          url: '/pages/home'
-                        })
-                      }
+                    }
+                  } else {
+                    let data = wepy.showModal({
+                      title: 'appid有误',
+                      content: '授权失败'
+                    })
+                    if (data.confirm) {
+                      wepy.switchTab({
+                        url: '/pages/home'
+                      })
                     }
                   }
                 }
-              )
+              })
             }
           }
         })

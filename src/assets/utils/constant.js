@@ -15,8 +15,12 @@ export const USER_INFO = "userInfo";
  * @type {String}
  */
 export const SYSTEM_INFO = "systemInfo";
-
-
 export const ADDRESS_ID = "addressId";
-
 export const SEL_CLASS_CODE = "selClassCode";
+
+/**
+ * 用户地理位置信息
+ * @type {Number}
+ */
+export const LATITUDE = "latitude";
+export const LONGITUDE = "longitude";

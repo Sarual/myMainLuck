@@ -5,17 +5,17 @@
   <TabBar @currentTab.user="getCurrentTab" :tabList.sync="tabList" :currentTab.sync="currentTab"></TabBar>
   <swiper class="text" style="text-align:center; margin-top:50rpx;" current="{{currentTab}}" bindchange="switchTab" duration='300'>
     <swiper-item>
-      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+      <scroll-view scroll-y="{{true}}">
         <image src="../assets/images/another/address.png" style="height:60rpx;width:60rpx;display:inline-block;text-align:center;" @tap="goGPS"></image>
       </scroll-view>
     </swiper-item>
     <swiper-item>
-      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+      <scroll-view scroll-y="{{true}}">
         <view @tap="openAddressPicker">{{province ? province.name : '省'}} - {{city ? city.name : '市' }} - {{area ? area.name : '区' }}</view>
       </scroll-view>
     </swiper-item>
     <swiper-item>
-      <scroll-view scroll-y="{{true}}" style="height: {{clientHeight?clientHeight+'px':'auto'}}">
+      <scroll-view scroll-y="{{true}}">
         发票
       </scroll-view>
     </swiper-item>
@@ -29,6 +29,10 @@
   import LoadingX from '../components/LoadingX'
   import TabBar from '../components/TabBar'
   import AreaPicker from '../components/AreaPicker'
+  import {
+    LATITUDE,
+    LONGITUDE
+  } from '../assets/utils/constant'
   export default class commonUserInfo extends wepy.page {
     config = {}
     data = {
@@ -67,7 +71,15 @@
       },
       goGPS() {
         // 地理定位
-
+        wepy.getLocation({
+          type: 'wgs84',
+          success(res) {
+            console.log('地理位置信息:', res)
+            wepy.setStorageSync(LATITUDE, res.latitude)
+            wepy.setStorageSync(LONGITUDE, res.longitude)
+            // 根据经纬度获取用户的城市名称（请求接口获取）
+          }
+        })
       },
       openAddressPicker() {
         this.$invoke('AreaPicker', 'openAddressPicker')

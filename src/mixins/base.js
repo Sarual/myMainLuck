@@ -1,5 +1,5 @@
 import wepy from 'wepy'
-import { service } from '../config.js'
+import { service } from '../assets/interface/interface.js'
 
 export default class baseMixin extends wepy.mixin {
   /**

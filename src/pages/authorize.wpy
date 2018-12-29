@@ -14,7 +14,7 @@
 
 <script>
   import wepy from 'wepy'
-  import service from '../config'
+  import service from '../assets/interface/interface.js'
   import http from '../mixins/base'
   import base from '../mixins/http'
   import tip from '../assets/utils/tip'

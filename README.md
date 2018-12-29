@@ -13,8 +13,8 @@
 #### 如何运行？
 
 ```
-$ 配置API文件
-$ cp config.js
+$ 配置接口文件
+$ cp interface.js
 执行如下命令：
 $ npm install
 ```

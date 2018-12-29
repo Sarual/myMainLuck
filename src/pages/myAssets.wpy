@@ -41,7 +41,6 @@
       }
     }
     onLoad(options) {
-      console.log('options:', options)
       this.titleText = '我的酒店'
     }
     onShow() {}

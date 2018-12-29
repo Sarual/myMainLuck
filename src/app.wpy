@@ -1,9 +1,7 @@
 <script>
   import wepy from 'wepy'
   import 'wepy-async-function'
-  import {
-    service
-  } from './config.js'
+  import { service } from '../src/assets/interface/interface.js'
   export default class extends wepy.app {
     config = {
       pages: [

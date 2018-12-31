@@ -5,6 +5,7 @@
   export default class extends wepy.app {
     config = {
       pages: [
+        'pages/authorize',
         'pages/home',
         'pages/personalCenter',
         'pages/myHotel',
@@ -13,7 +14,6 @@
         'pages/commonUseInfo',
         'pages/test/test',
         'pages/register',
-        'pages/authorize',
         'pages/git'
       ],
       window: {

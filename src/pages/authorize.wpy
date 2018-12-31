@@ -2,11 +2,11 @@
   <div>
     <TitleBar :titleText.sync="titleText"></TitleBar>
     <view class="authorize-contianer">
-      <image class="authorize-icon"></image>
+      <image class="authorize-icon" src="../assets/images/another/banner-6.jpg"></image>
       <view class="auth-item">AA连锁酒店申请获取以下权限:</view>
       <view class="auth-item">获取你的公开信息（头像、昵称等）</view>
       <view class="btn-authorize">
-        <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="onGotUserInfo">授权</button>
+        <button open-type="getUserInfo" type="primary" lang="zh_CN" bindgetuserinfo="onClick">授权</button>
       </view>
     </view>
   </div>
@@ -14,14 +14,12 @@
 
 <script>
   import wepy from 'wepy'
-  import service from '../assets/interface/interface.js'
   import http from '../mixins/base'
   import base from '../mixins/http'
-  import tip from '../assets/utils/tip'
+  // import tip from '../assets/utils/tip'
   import TitleBar from '../components/TitleBar'
   import {
     SYSTEM_INFO,
-    USER_SPECICAL_INFO,
     USER_INFO
   } from '../assets/utils/constant'
   export default class Authorize extends wepy.page {
@@ -34,109 +32,47 @@
       titleText: ''
     }
     onLoad() {
-      // debugger
-      var that = this
       this.titleText = '微信授权'
       let userInfo = wepy.getStorageSync(USER_INFO)
-      // 判断是否有nickName，没有就去获取
-      if (!userInfo.nickName) {
-        wepy.getUserInfo({
-          success: data => {
-            wepy.setStorageSync(USER_INFO, data.userInfo)
-            // 判断是否登陆，没有就去登陆
-            wepy.login({ // 登录获取
-              success: res => {
-                if (res.code) {
-                  let systemInfo = wepy.getSystemInfoSync()
-                  wepy.setStorageSync(SYSTEM_INFO, systemInfo)
-                  // 存储用户认证的session（用code和nickName去换取）=== 此请求是让后台也同步表示当前用户是经过授权的。
-                  that.$post({
-                    url: service.wxJsCode2Session,
-                    headers: {
-                      'X-JINKU-WECHAT-FORM-ID': that.formId
-                    },
-                    data: {
-                      jsCode: res.code,
-                      nickName: data.userInfo.nickName
-                    }
-                  }, {
-                    success: ({
-                      statusCode,
-                      data
-                    }) => {
-                      if (statusCode === 200) {
-                        tip.success('授权成功')
-                        // if (rlt.data.result) {
-                        //   let data = rlt.data
-                        //   if (data.data.openid) {
-                        //     wepy.setStorageSync(USER_SPECICAL_INFO, data.data)
-                        //   }
-                        // }
-                      } else {
-                        // 收不到验证码/验证失败
-                      }
-                    }
-                  })
-                }
-              }
-            })
-          }
-        })
+      // console.log('onLoad userInfo:', userInfo)
+      if (userInfo) {
+        this.goHome()
       }
-      wepy.switchTab({
-        url: '/pages/home'
+    }
+    goHome() {
+      this.$gotoSwitch('home')
+    }
+    onClick(e) {
+      this.getUserInfo()
+      console.log(e)
+      if (e.detail.errMsg === 'getUserInfo:ok') {
+        this.wxLogin()
+      }
+    }
+    getUserInfo() {
+      wepy.getUserInfo({
+        success: data => {
+          console.log('getUserInfo', '获取成功', data)
+          wepy.setStorageSync(USER_INFO, data.userInfo)
+        },
+        fail: (data) => {
+          console.log('getUserInfo', '获取失败', data)
+        }
       })
     }
-    onShow() {}
-    onGotUserInfo(e) {
-      var that = this
-      if (e.detail.errMsg === 'getUserInfo:ok') {
-        wepy.login({ // 登录获取
-          success: res => {
-            if (res.code) {
-              wepy.setStorageSync(USER_INFO, e.detail.userInfo)
-              let systemInfo = wepy.getSystemInfoSync()
-              wepy.setStorageSync(SYSTEM_INFO, systemInfo)
-              // 存储用户认证的session
-              that.$post({
-                url: service.wxJsCode2Session,
-                headers: {
-                  'X-JINKU-WECHAT-FORM-ID': that.formId
-                },
-                data: {
-                  jsCode: res.code,
-                  nickName: res.userInfo.nickName
-                }
-              }, {
-                success: ({
-                  statusCode,
-                  data
-                }) => {
-                  let openid = data.data.openid
-                  if (statusCode === 200) {
-                    if (openid) {
-                      wepy.setStorageSync(USER_SPECICAL_INFO, data.data.openid)
-                      wepy.switchTab({
-                        url: '/pages/home'
-                      })
-                    }
-                  } else {
-                    let data = wepy.showModal({
-                      title: 'appid有误',
-                      content: '授权失败'
-                    })
-                    if (data.confirm) {
-                      wepy.switchTab({
-                        url: '/pages/home'
-                      })
-                    }
-                  }
-                }
-              })
+    wxLogin() {
+      wepy.login({
+        success: res => {
+          if (res.code) {
+            let systemInfo = wepy.getSystemInfoSync()
+            wepy.setStorageSync(SYSTEM_INFO, systemInfo)
+            console.log(res)
+            if (res.errMsg === 'login:ok') {
+              console.log('微信登陆成功后的处理')
             }
           }
-        })
-      }
+        }
+      })
     }
     methods = {}
     events = {}

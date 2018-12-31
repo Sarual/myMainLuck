@@ -2,7 +2,7 @@
 <div>
   <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
   <view class="strategy">
-    学习 git
+    学 习 git 修改文件
   </view>
 </div>
 </template>

@@ -30,6 +30,10 @@
         <image src="{{avatarUrl}}"></image>
         <text>微信授权</text>
       </navigator>
+      <navigator url="/pages/git">
+        <image src="{{avatarUrl}}"></image>
+        <text>学习git</text>
+      </navigator>
     </view>
     <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
         <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->

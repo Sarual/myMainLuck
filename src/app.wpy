@@ -13,7 +13,8 @@
         'pages/commonUseInfo',
         'pages/test/test',
         'pages/register',
-        'pages/authorize'
+        'pages/authorize',
+        'pages/git'
       ],
       window: {
         backgroundTextStyle: 'light',

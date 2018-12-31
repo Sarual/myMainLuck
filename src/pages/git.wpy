@@ -2,7 +2,7 @@
 <div>
   <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
   <view class="strategy">
-    学 习 git 修改文件
+    学 习 git 修改文件 测试 git commit -am 提交 在master分支也提交上去了
   </view>
 </div>
 </template>
@@ -10,7 +10,7 @@
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
-  export default class Home extends wepy.page {
+  export default class Git extends wepy.page {
     mixins = [base]
     config = {
     }

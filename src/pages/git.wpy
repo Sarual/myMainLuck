@@ -1,8 +1,8 @@
 <template>
 <div>
-  <TitleBar :titleText.sync="titleText"></TitleBar>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
   <view class="strategy">
-    学习git
+    学习 git
   </view>
 </div>
 </template>
@@ -15,7 +15,8 @@
     config = {
     }
     data = {
-      titleText: ''
+      titleText: '',
+      isBackBtn: true
     }
     components = {
       TitleBar

@@ -31,7 +31,7 @@
         <text>微信授权</text>
       </navigator>
       <navigator url="/pages/git">
-        <image src="{{avatarUrl}}"></image>
+        <image src="../assets/images/another/icon_VerygoodGray@2x.png"></image>
         <text>学习git</text>
       </navigator>
     </view>

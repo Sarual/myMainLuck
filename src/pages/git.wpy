@@ -1,0 +1,33 @@
+<template>
+<div>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
+  <view class="strategy">
+    学 习 git 修改文件 测试git commit -am 提交
+  </view>
+</div>
+</template>
+<script>
+  import wepy from 'wepy'
+  import base from '../mixins/base'
+  import TitleBar from '../components/TitleBar'
+  export default class Home extends wepy.page {
+    mixins = [base]
+    config = {
+    }
+    data = {
+      titleText: '',
+      isBackBtn: true
+    }
+    components = {
+      TitleBar
+    }
+    methods = {}
+    onLoad() {}
+    onShow() {
+      this.titleText = '学习git'
+    }
+  }
+</script>
+<style lang="scss" rel="stylesheet/scss" scoped>
+  @import "../assets/stylesheets/layout.scss";
+</style>

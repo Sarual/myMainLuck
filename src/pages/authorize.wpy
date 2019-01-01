@@ -43,8 +43,8 @@
       this.$gotoSwitch('home')
     }
     onClick(e) {
-      this.getUserInfo()
       console.log(e)
+      this.getUserInfo()
       if (e.detail.errMsg === 'getUserInfo:ok') {
         this.wxLogin()
       }
@@ -52,11 +52,11 @@
     getUserInfo() {
       wepy.getUserInfo({
         success: data => {
-          console.log('getUserInfo', '获取成功', data)
+          console.log('getUserInfo', '授权成功', data)
           wepy.setStorageSync(USER_INFO, data.userInfo)
         },
         fail: (data) => {
-          console.log('getUserInfo', '获取失败', data)
+          console.log('getUserInfo', '授权失败', data)
         }
       })
     }
@@ -66,10 +66,7 @@
           if (res.code) {
             let systemInfo = wepy.getSystemInfoSync()
             wepy.setStorageSync(SYSTEM_INFO, systemInfo)
-            console.log(res)
-            if (res.errMsg === 'login:ok') {
-              console.log('微信登陆成功后的处理')
-            }
+            console.log('wxLogin', '登陆成功', res)
           }
         }
       })

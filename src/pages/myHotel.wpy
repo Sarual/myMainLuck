@@ -42,7 +42,7 @@
       }
     }
     onLoad(options) {
-      console.log('options:', options)
+      console.log('myHotel-options:', options)
       this.titleText = '我的酒店'
     }
     onShow() {}

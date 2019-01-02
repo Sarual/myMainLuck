@@ -57,8 +57,8 @@
     }
     onLoad(options) {
       var that = this
-      //
-      that.titleText = '常用信息'
+      console.log('myOrder-options:', options)
+      that.titleText = '我的订单'
       if (that.isLoading) {
         that.loadBarLimit()
       }

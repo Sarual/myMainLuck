@@ -1,50 +1,52 @@
 <template>
-  <div>
-    <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn"></TitleBar>
-    <view class="option">
-      <navigator url="/pages/myHotel">
-        <image src="../assets/images/another/icon_orders@2x.png"></image>
-        <text>我的酒店</text>
-      </navigator>
-      <navigator url="/pages/myOrder">
-        <image src="../assets/images/another/girl.svg"></image>
-        <text>我的订单</text>
-      </navigator>
-      <navigator url="/pages/myAssets">
-        <image src="../assets/images/another/icon_score@2x.png"></image>
-        <text>我的资产</text>
-      </navigator>
-      <navigator url="/pages/commonUseInfo">
-        <image src="../assets/images/another/clock.png"></image>
-        <text>常用信息</text>
-      </navigator>
-      <navigator url="./test/test">
-        <image src="../assets/images/another/icon_GoodGray@2x.png"></image>
-        <text>我的测试</text>
-      </navigator>
-      <navigator url="/pages/register">
-        <image src="../assets/images/another/icon_traveler@2x.png"></image>
-        <text>个人注册</text>
-      </navigator>
-      <navigator url="/pages/authorize">
-        <image src="{{avatarUrl}}"></image>
-        <text>微信授权</text>
-      </navigator>
-      <navigator url="/pages/git">
-        <image src="../assets/images/another/icon_VerygoodGray@2x.png"></image>
-        <text>学习git</text>
-      </navigator>
-    </view>
-    <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
-        <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->
-  </div>
+  <TitleBar :titleText.sync="titleText" :isBackBtn.sync="isBackBtn">
+  </TitleBar>
+  <view class="option">
+    <navigator url="/pages/myHotel">
+      <image src="../assets/images/another/icon_orders@2x.png"></image>
+      <text>我的酒店</text>
+    </navigator>
+    <navigator url="/pages/myOrder">
+      <image src="../assets/images/another/girl.svg"></image>
+      <text>我的订单</text>
+    </navigator>
+    <navigator url="/pages/myAssets">
+      <image src="../assets/images/another/icon_score@2x.png"></image>
+      <text>我的资产</text>
+    </navigator>
+    <navigator url="/pages/commonUseInfo">
+      <image src="../assets/images/another/clock.png"></image>
+      <text>常用信息</text>
+    </navigator>
+    <navigator url="./test/test">
+      <image src="../assets/images/another/icon_GoodGray@2x.png"></image>
+      <text>我的测试</text>
+    </navigator>
+    <navigator url="/pages/register">
+      <image src="../assets/images/another/icon_traveler@2x.png"></image>
+      <text>个人注册</text>
+    </navigator>
+    <navigator url="/pages/authorize">
+      <image src="{{avatarUrl}}"></image>
+      <text>微信授权</text>
+    </navigator>
+    <navigator url="/pages/git">
+      <image src="../assets/images/another/icon_VerygoodGray@2x.png"></image>
+      <text>学习git</text>
+    </navigator>
+  </view>
+  <button class="myOrder" @tap="toMyDetail(0, 'toMYORDER')">测试</button>
+  <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
+      <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->
 </template>
 
 <script>
   import wepy from 'wepy'
   import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
-  import { USER_INFO } from '../assets/utils/constant'
+  import {
+    USER_INFO
+  } from '../assets/utils/constant'
   export default class PersonCenter extends wepy.page {
     mixins = [base]
     config = {}
@@ -56,44 +58,46 @@
       TitleBar
     }
     methods = {
-      // toMyDetail (id, detail) {
-      //   console.log('id:', id, 'detail:', detail)
-      //   if (id === '0') {
-      //     console.log('跳转至我的订单页面')
-      //     this.$goto('myOrder?id=0')
-      //   } else if (id === '1') {
-      //     console.log('跳转至我的酒店页面')
-      //     this.$goto('myHotel?id=1')
-      //   }
-      // }
+      toMyDetail(id, detail) {
+        var name = 'Sarual'
+        var age = 23
+        console.log('id:', id, 'data:', detail)
+        if (id === '0') {
+          console.log('跳转至我的订单页面')
+          // this.$goto('myOrder?id=000')
+          this.$goto('myOrder?id=000&name=' + name + '&data=' + detail + '&age=' + age)
+        } else if (id === '1') {
+          console.log('跳转至我的酒店页面')
+          this.$goto('myHotel?id=111')
+        }
+      }
     }
     onLoad() {
       this.titleText = '个人中心'
       this.avatarUrl = wepy.getStorageSync(USER_INFO).avatarUrl
     }
-    onShow() {
-    }
+    onShow() {}
   }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/stylesheets/layout.scss";
-  /* button{
-        width: 200rpx;
-        height: 92rpx;
-        margin-top: 30rpx;
-        line-height: 92rpx;
-        color: #fb5a35;
-        font-size: 26rpx;
-        background: none;
-        text-align: center;
-        padding: 0;
-        font-size: 26rpx;
-        background-color: #C6E2FF;
-      }
-      button:active{
-        background-color: #87CEFA;
-      } */
+  button {
+    width: 200rpx;
+    height: 92rpx;
+    margin-top: 30rpx;
+    line-height: 92rpx;
+    color: #fb5a35;
+    font-size: 26rpx;
+    background: none;
+    text-align: center;
+    padding: 0;
+    font-size: 26rpx;
+    background-color: #C6E2FF;
+  }
+  button:active {
+    background-color: #87CEFA;
+  }
   .option {
     padding: 0 32rpx;
     width: 686rpx;

@@ -1,7 +1,9 @@
 <script>
   import wepy from 'wepy'
   import 'wepy-async-function'
-  import { service } from '../src/assets/interface/interface.js'
+  import {
+    service
+  } from '../src/assets/interface/interface.js'
   export default class extends wepy.app {
     config = {
       pages: [
@@ -59,26 +61,26 @@
       this.use('requestfix')
     }
     onLaunch(options) {
-      console.log('app页面onLaunch函数this:', this)
+      // console.log('app页面onLaunch函数this:', this)
       console.log('app页面onLaunch函数options:', options)
-      console.log('isFormal:', service.isFormal)
+      // console.log('isFormal:', service.isFormal)
       let that = this
       let pathUrl = this.urlToString(options.path, options.query)
       console.log(pathUrl)
-      console.log()
       this.globalData.pathUrl = pathUrl
       this.globalData.accessToken = wepy.getStorageSync(service.isFormal ? 'accessToken' : 'accessTokenInfo') || false
       if (this.globalData.isLogin) {
         // 如果登陆
         this.globalData.isLogin = false
         wepy.checkSession({
-          success: function() {
+          success: res => {
+            // console.log('checkSession:', res)
             // debugger
             if (!this.globalData.accessToken) {
               that.loginToken()
             }
           },
-          fail: function() {
+          fail: res => {
             that.loginToken()
           }
         })
@@ -132,6 +134,7 @@
                   })
                 }
                 let url = this.globalData.pathUrl.slice(6, this.globalData.pathUrl.length)
+                console.log('url:', url)
                 wepy.reLaunch({
                   url: url
                 })

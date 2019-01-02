@@ -5,7 +5,6 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/authorize',
         'pages/home',
         'pages/personalCenter',
         'pages/myHotel',
@@ -14,6 +13,7 @@
         'pages/commonUseInfo',
         'pages/test/test',
         'pages/register',
+        'pages/authorize',
         'pages/git'
       ],
       window: {
@@ -65,14 +65,8 @@
       let that = this
       let pathUrl = this.urlToString(options.path, options.query)
       console.log(pathUrl)
-      let sourceCode = options.query.source_code || ''
+      console.log()
       this.globalData.pathUrl = pathUrl
-      if (sourceCode) {
-        wepy.setStorage({
-          key: 'sourceCode',
-          data: options.query.source_code
-        })
-      }
       this.globalData.accessToken = wepy.getStorageSync(service.isFormal ? 'accessToken' : 'accessTokenInfo') || false
       if (this.globalData.isLogin) {
         // 如果登陆
@@ -81,11 +75,11 @@
           success: function() {
             // debugger
             if (!this.globalData.accessToken) {
-              that.loginToken(sourceCode)
+              that.loginToken()
             }
           },
           fail: function() {
-            that.loginToken(sourceCode)
+            that.loginToken()
           }
         })
       }
@@ -105,7 +99,7 @@
     urlToString(path, query) {
       return path + '?id=' + query.id
     }
-    loginToken(sourceCode) {
+    loginToken() {
       wepy.login({
         success: res => {
           if (res.code) {
@@ -115,9 +109,6 @@
               method: 'POST',
               data: {
                 code: res.code
-              },
-              header: {
-                'X-JINKU-WECHAT-SOURCE-CODE': sourceCode
               },
               success: function(res) {
                 // 判断环境，正式环境和测试环境存储用户的key变量不同，加以区分。

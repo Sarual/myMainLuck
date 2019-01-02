@@ -6,12 +6,10 @@ export default class httpMixin extends wepy.mixin {
   mixins = [base]
   data = {
     accessToken: '',
-    sourceCode: '',
     isLogin: true
   }
   onLoad(options) {
     let that = this
-    this.sourceCode = wepy.getStorageSync('sourceCode') || ''
     this.accessToken = wepy.getStorageSync(service.isFormal ? 'accessToken' : 'accessTokenInfo') || false
   }
   /* =================== [$get 发起GET请求] =================== */
@@ -22,8 +20,7 @@ export default class httpMixin extends wepy.mixin {
     const methods = 'GET'
     if (this.accessToken) {
       headers = Object.assign({
-        'Authorization': this.accessToken,
-        'X-JINKU-WECHAT-SOURCE-CODE': this.sourceCode
+        'Authorization': this.accessToken
       }, headers)
       this.$ajax(
         {url, headers, methods, data},
@@ -40,8 +37,7 @@ export default class httpMixin extends wepy.mixin {
     const methods = 'POST'
     if (this.accessToken) {
       headers = Object.assign({
-        'Authorization': this.accessToken,
-        'X-JINKU-WECHAT-SOURCE-CODE': this.sourceCode
+        'Authorization': this.accessToken
       }, headers)
       this.$ajax(
         {url, headers, methods, data},
@@ -172,9 +168,7 @@ export default class httpMixin extends wepy.mixin {
             data: {
               code: res.code
             },
-            header: {
-              'X-JINKU-WECHAT-SOURCE-CODE': this.sourceCode
-            },
+            // 一进来就登陆拦截的请求头，后期添加----------------------
             success: function (res) {
               if (service.isFormal) {
                 wepy.setStorage({

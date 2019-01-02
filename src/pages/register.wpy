@@ -49,9 +49,6 @@
       var that = this
       that.$post({
         url: service.uploadWechatUserinfo,
-        headers: {
-          'X-JINKU-WECHAT-FORM-ID': that.formId
-        },
         data: {
           phone: that.phone
         }
@@ -65,7 +62,7 @@
             tip.success('验证成功')
             that.$apply()
           } else {
-            // 收不到验证码/验证失败
+            // 收不到验证码/验证失败/验证码不正确
           }
         }
       })
@@ -82,9 +79,6 @@
       debugger
       that.$post({
         url: service.uploadWechatUserinfo,
-        headers: {
-          'X-JINKU-WECHAT-FORM-ID': that.formId
-        },
         data: query
       }, {
         success: ({

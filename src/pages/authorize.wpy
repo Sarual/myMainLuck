@@ -16,7 +16,6 @@
   import wepy from 'wepy'
   import http from '../mixins/base'
   import base from '../mixins/http'
-  // import tip from '../assets/utils/tip'
   import TitleBar from '../components/TitleBar'
   import {
     SYSTEM_INFO,
@@ -35,7 +34,7 @@
       this.titleText = '微信授权'
       let userInfo = wepy.getStorageSync(USER_INFO)
       // console.log('onLoad userInfo:', userInfo)
-      if (userInfo) {
+      if (userInfo.nickName) {
         this.goHome()
       }
     }
@@ -67,9 +66,18 @@
             let systemInfo = wepy.getSystemInfoSync()
             wepy.setStorageSync(SYSTEM_INFO, systemInfo)
             console.log('wxLogin', '登陆成功', res)
+            if (res.errMsg === 'login:ok') {
+              this.getUserOpenId()
+            }
           }
+        },
+        fail: res => {
+          console.log('getUserInfo', '登陆失败', res)
         }
       })
+    }
+    getUserOpenId() {
+      console.log('请求后台获取用户openid')
     }
     methods = {}
     events = {}

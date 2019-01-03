@@ -13,6 +13,7 @@
         'pages/myOrder',
         'pages/myAssets',
         'pages/commonUseInfo',
+        'pages/optCity',
         'pages/test/test',
         'pages/register',
         'pages/authorize',

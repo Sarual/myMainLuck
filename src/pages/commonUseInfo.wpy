@@ -16,7 +16,7 @@
     </swiper-item>
     <swiper-item>
       <scroll-view scroll-y="{{true}}">
-        发票
+        <view @tap="optCity">{{cityName}}</view>
       </scroll-view>
     </swiper-item>
   </swiper>
@@ -25,6 +25,7 @@
 
 <script>
   import wepy from 'wepy'
+  import base from '../mixins/base'
   import TitleBar from '../components/TitleBar'
   import LoadingX from '../components/LoadingX'
   import TabBar from '../components/TabBar'
@@ -34,13 +35,15 @@
     LONGITUDE
   } from '../assets/utils/constant'
   export default class commonUserInfo extends wepy.page {
+    mixins = [base]
     config = {}
     data = {
       titleText: '',
       isBackBtn: true,
       isLoading: true,
       currentTab: 0,
-      tabList: ['旅客定位', '地址', '发票'],
+      tabList: ['旅客定位', '地址', 'AA地址选择'],
+      cityName: '北京',
       id: '',
       province: '',
       city: '',
@@ -93,6 +96,9 @@
         this.cityCode = city.code
         this.areaCode = area.code
         this.$apply()
+      },
+      optCity() {
+        this.$goto('optCity')
       }
     }
     onLoad(options) {

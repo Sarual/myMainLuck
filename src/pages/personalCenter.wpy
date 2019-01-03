@@ -35,9 +35,8 @@
       <text>学习git</text>
     </navigator>
   </view>
-  <button class="myOrder" @tap="toMyDetail(0, 'toMYORDER')">测试</button>
-  <!-- <button class="myOrder" @tap="toMyDetail(0, 'toMyOder')">我的订单</button>
-      <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">我的酒店</button> -->
+  <button class="myOrder" @tap="toMyDetail(0, 'toMYORDER')">携带参数测试一</button>
+  <button class="myHotel" @tap="toMyDetail(1, 'toMyHotel')">携带参数测试二</button>
 </template>
 
 <script>

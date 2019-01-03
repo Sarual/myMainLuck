@@ -1,7 +1,7 @@
 <template>
 <div>
   <TitleBar :titleText.sync="titleText"></TitleBar>
-  <view class="strategy">
+  <view class="home">
     <label class="titleH1">什么是福利？</label>
     <text class="detailed">福利是员工的间接报酬。一般包括健康保险、带薪假期、过节礼物或退休金等形式。这些奖励作为企业成员福利的一部分，奖给职工个人或者员工小组。</text>
     <label class="titleH1">如何完善福利制度？</label>
@@ -31,7 +31,7 @@
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../assets/stylesheets/layout.scss";
-  .strategy {
+  .home {
     padding: 0 32rpx;
     background: #fff;
     overflow: hidden;
